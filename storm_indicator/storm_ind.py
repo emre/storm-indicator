@@ -1,15 +1,7 @@
-#!/usr/bin/env python
-
-try:
-    from storm import ssh_config
-except ImportError:
-    raise ImportError("stormssh is not installed. you need to install it in order to use storm-indicator."
-                      " try 'sudo pip install stormssh'.")
 
 import gobject
 import gtk
 import appindicator
-import getpass
 import os
 import sys
 
@@ -73,47 +65,3 @@ class StormIndicator(object):
             md.run()
         finally:
             md.destroy()
-
-
-if __name__ == '__main__':
-
-    indicator = StormIndicator()
-    indicator.add_menu_item('SSH Connections', sensitive=False)
-    indicator.add_seperator()
-
-    ssh_config = ssh_config.ConfigParser()
-
-    for host_entry in ssh_config.load():
-
-        if not host_entry.get("type") == 'entry' or host_entry.get("host") == '*':
-            continue
-
-        identifier = " {host} \n    {user}@{hostname}".format(
-            user=host_entry.get("options", {}).get("user", getpass.getuser()),
-            hostname=host_entry.get("options", {}).get("hostname"),
-            host=host_entry.get("host"),
-        )
-
-        indicator.add_seperator()
-
-        indicator.add_menu_item(
-            identifier,
-            host_entry.get("host"),
-            sensitive=True
-        )
-
-    indicator.add_seperator()
-    indicator.add_menu_item(
-        'About',
-        value='about',
-        sensitive=True
-    )
-
-    indicator.add_seperator()
-    indicator.add_menu_item(
-        'Quit',
-        value='quit',
-        sensitive=True
-    )
-
-    indicator.run()
