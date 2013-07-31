@@ -1,7 +1,7 @@
 storm-indicator
 ===============
 
-A unity indicator for connecting to your SSH connections easily.
+A unity indicator for connecting to your SSH hosts easily.
 
 <img src="http://i.imgur.com/0TG2kTi.png">
 
