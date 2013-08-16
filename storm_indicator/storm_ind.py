@@ -5,6 +5,7 @@ import appindicator
 import os
 import sys
 
+from subprocess import Popen
 
 class StormIndicator(object):
 
@@ -29,7 +30,7 @@ class StormIndicator(object):
         elif identifier == 'quit':
             sys.exit(0)
         else:
-            self.run_program("gnome-terminal -e 'bash -c \"ssh %s; exec bash;\"'" % identifier)
+            self.run_program(["gnome-terminal", "-e", "bash -c \"ssh %s; exec bash;\"" % identifier])
 
     def add_menu_item(self, text, value=None, sensitive=True):
         menu_item = gtk.MenuItem(text)
@@ -51,7 +52,7 @@ class StormIndicator(object):
         gtk.main()
 
     def run_program(self, cmd):
-        os.system(cmd)
+        Popen(cmd)
 
     def pop_dialog(self, message, error=False):
         if error:
