@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='storm-indicator',
-    version='0.1',
+    version='0.2',
     packages=['storm_indicator'],
     url='https://github.com/emre/storm-indicator',
     license='MIT',
