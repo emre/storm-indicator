@@ -9,12 +9,12 @@ indicator.add_seperator()
 import getpass
 
 try:
-    from storm import ssh_config
+    from storm.parsers import ssh_config_parser
 except ImportError:
     raise ImportError("stormssh is not installed. you need to install it in order to use storm-indicator."
                       " try 'sudo pip install stormssh'.")
 
-ssh_config = ssh_config.ConfigParser()
+ssh_config = ssh_config_parser.ConfigParser()
 
 for host_entry in ssh_config.load():
 
